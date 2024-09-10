@@ -11,6 +11,6 @@ entryRouter.post('/', EntryController.postEntry)
 
 entryRouter.put('/:id', EntryController.putEntry)
 
-entryRouter.delete('/:id', EntryController.deleteEntry)
+entryRouter.patch('/:id', EntryController.putEntry)
 
-entryRouter.patch('/:id', EntryController.patchEntry)
+entryRouter.delete('/:id', EntryController.deleteEntry)

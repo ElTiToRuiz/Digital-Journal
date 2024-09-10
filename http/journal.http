@@ -1,0 +1,26 @@
+### GET ALL 
+GET http://localhost:5000/entries
+
+### GET BY SEARCH
+GET http://localhost:5000/entries/search?dateb=1726002930002
+
+### CREATE ONE
+POST http://localhost:5000/entries
+Content-Type: application/json
+
+{
+    "title": "My first entry",
+    "content": "This is my first entry in my journal"
+}
+
+### UPDATE ONE
+PATCH  http://localhost:5000/entries/ca4221dc-9b82-430f-b231-705565aabbfb
+Content-Type: application/json
+
+{
+    "mood": "Happy",
+    "tags": ["personal", "journal"]
+}
+
+### DELETE ONE
+DELETE http://localhost:5000/entries/356f9634-3597-4dd1-ada5-e0f6da0fc360

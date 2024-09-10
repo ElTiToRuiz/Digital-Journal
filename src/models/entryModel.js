@@ -1,4 +1,6 @@
-import { getAllEntriesQuery } from "../utils/query"
+import { randomUUID } from "node:crypto"
+import { deleteEntryQuery, getAllEntriesQuery, getOneEntryQuery, postEntryQuery, putEntryQuery, searchEntriesQuery } from "../utils/query.js"
+import { Database } from "../service/connection.js"
 
 export class Entry{
 
@@ -23,12 +25,13 @@ export class Entry{
         }
     }
 
-    static async getOneEntry(){
+    static async getOneEntry({id}){
         try{
             await Entry.connect()
-            const query = getOneEntryQuery()
+            const query = getOneEntryQuery({id})
+            console.log(query)
             const result = await this.database.executeQuery({query})
-            return result.rows
+            return result.rows[0]
         }catch(err){
             throw err
         }
@@ -45,10 +48,12 @@ export class Entry{
         }
     }
 
-    static async postEntry(data){
+    static async postEntry({data}){
         try{
             await Entry.connect()
-            const query = postEntryQuery({data})
+            const id = randomUUID()
+            const date = Date.now()
+            const query = postEntryQuery({id, date, data})
             await this.database.executeQuery({query})
             return true
         }catch(err){
@@ -56,10 +61,12 @@ export class Entry{
         }
     }
 
-    static async putEntry(data, {id}){
+    static async putEntry({data, id}){
         try{
             await Entry.connect()
-            const query = putEntryQuery({data, id})
+            console.log(data)
+            const date = Date.now()
+            const query = putEntryQuery({data, id, date})
             await this.database.executeQuery({query})
             return true
         }catch(err){

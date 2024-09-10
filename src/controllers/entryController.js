@@ -27,10 +27,10 @@ export class EntryController{
 
     static async postEntry(req, res){
         try{
-            const input = req.body
-            const validate = validateEntry(input)
+            const data = req.body
+            const validate = validateEntry(data)
             if(validate.error) return res.status(400).send(validate.error.details[0].message) 
-            await Entry.postEntry(input)
+            await Entry.postEntry({data})
             res.json({ message: 'Journal file saved successfully' });
         }catch(err){
             console.error(err)
@@ -43,10 +43,10 @@ export class EntryController{
             const id = req.params.id
             const result = await EntryController.checkEntryExist({id})
             if(!result) return res.status(404).send('Entry not found')
-            const input = req.body
-            const validate = validatePartialEntry(input, {id})
-            if(validate.error) return res.status(400).send(validate.error.details[0].message)
-            await Entry.putEntry(input)
+            const data = req.body
+            const validate = validatePartialEntry(data)
+            if(validate.error) return res.status(400).send(validate.error)
+            await Entry.putEntry({data, id})
             res.json({message: 'Journal file successfully updated'});
         }catch(err){
             console.error(err)
@@ -69,8 +69,8 @@ export class EntryController{
 
     static async checkEntryExist({id}){
         try{
-            const entry = await Entry.getOneEntry(id)
-            return entry.length === 0 ? false : true
+            const entry = await Entry.getOneEntry({id})
+            return entry === undefined ? false : true
         }catch(err){
             console.error(err)
             throw err
