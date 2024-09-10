@@ -14,13 +14,21 @@ A Digital Journal/Diary application built with Node.js that allows users to secu
 - License
 
 ## Features
-- User Authentication: Secure sign-up and login using JWT tokens.
-- CRUD Operations: Create, read, update, and delete journal entries.
-- Mood Tracking: Track your mood with each entry and visualize mood trends over time.
-- Search: Full-text search for journal entries by title, content, or tags.
-- Tags/Categories: Organize entries by custom tags or categories.
-- Data Export: Export journal entries to markdown or PDF format.
-- Reminders: Optional daily/weekly reminders via email to log your thoughts.
+
+### User Authentication: 
+Secure sign-up and login using JWT tokens.
+
+### CRUD Operations: 
+Create, read, update, and delete journal entries.
+
+### Mood Tracking: 
+Track your mood with each entry and visualize mood trends over time.
+
+### Search: 
+Full-text search for journal entries by title, content, or tags.
+
+### Tags/Categories: 
+Organize entries by custom tags or categories.
 
 
 ## Tech Stack
@@ -37,6 +45,7 @@ A Digital Journal/Diary application built with Node.js that allows users to secu
 ## Project Structure
 
 ### Backend Structure
+```
 digital-journal-backend/
 ├── http/               # Directory for storing HTTP request files
 ├── src/
@@ -49,31 +58,41 @@ digital-journal-backend/
 │   └── app.js          # Main Express app setup
 ├── .env                # Environment variables (e.g., DB_URL, JWT_SECRET)
 └── package.json        # Project metadata and dependencies
+```
 
 ## Setup Instructions
 
 ### Backend Setup
 
 1. Clone the repository:
-`
+
+```bash
 git clone https://github.com/your-username/digital-journal.git
 cd digital-journal/digital-journal-backend
-`
+```
 
 2. Install dependencies:
-`
-npm install
-`
+```bash
+    npm install
+```
+
 3. Create a `.env` file with environment variables:
-`
+
+```bash
 DATABASE_URl=databse_url
 DATABASE_TOKEN=database_token 
 JWT_SECRET=your_jwt_secret_key
 PORT=5000
-`
+```
 
 4. Start the server:
-`npm run dev`
+
+```bash
+npm run dev
+```
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Contributing
+Contributions are welcome! Please submit a pull request or open an issue to suggest improvements or report bugs.
