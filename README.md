@@ -49,3 +49,31 @@ digital-journal-backend/
 │   └── app.js          # Main Express app setup
 ├── .env                # Environment variables (e.g., DB_URL, JWT_SECRET)
 └── package.json        # Project metadata and dependencies
+
+## Setup Instructions
+
+### Backend Setup
+
+1. Clone the repository:
+`
+git clone https://github.com/your-username/digital-journal.git
+cd digital-journal/digital-journal-backend
+`
+
+2. Install dependencies:
+`
+npm install
+`
+3. Create a `.env` file with environment variables:
+`
+DATABASE_URl=databse_url
+DATABASE_TOKEN=database_token 
+JWT_SECRET=your_jwt_secret_key
+PORT=5000
+`
+
+4. Start the server:
+`npm run dev`
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
