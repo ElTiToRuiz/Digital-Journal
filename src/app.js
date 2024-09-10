@@ -3,16 +3,12 @@ import { entryRouter } from "./routes/entryRoutes.js"
 import { authRouter } from "./routes/authRoutes.js"
 
 const app = express()
+
 app.use(json())
 app.disable('x-powered-by') 
 
-app.get("/", (req, res) => {
-    res.send("<h1>Hello World</h1>")
-})
-
 app.use("/entries", entryRouter)
 app.use("/auth", authRouter)
-
 
 const PORT = process.env.PORT ?? 3000
 
