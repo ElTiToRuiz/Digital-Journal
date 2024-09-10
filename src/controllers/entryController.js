@@ -1,33 +1,79 @@
 import { Entry } from "../models/entryModel.js"
+import { validateEntry, validatePartialEntry } from "../scheme/entryScheme.js";
 
 export class EntryController{
-    static getAllEntries(req, res){
-        Entry.getAllEntries()
-        res.send('Entries')
+    static async getAllEntries(req, res){
+        try{
+            const entries = await Entry.getAllEntries()
+            if(entries.length === 0) return res.json({ message: "No entries found" });
+            return res.json(entries)
+        }catch(err){
+            console.error(err)
+            res.status(500).send('Internal server error')
+        }
     }
 
-    static searchEntries(req, res){
-        Entry.searchEntries()
-        res.send('Search')
+    static async searchEntries(req, res){
+        try{
+            const filters = req.query
+            const entries = await Entry.searchEntries({filters})
+            if(entries.length === 0) return res.json({ message: "No entries found" });
+            return res.json(entries)
+        }catch(err){
+            console.error(err)
+            res.status(500).send('Internal server error')
+        }
     }
 
-    static postEntry(req, res){
-        Entry.postEntry()
-        res.send('Posted')
+    static async postEntry(req, res){
+        try{
+            const input = req.body
+            const validate = validateEntry(input)
+            if(validate.error) return res.status(400).send(validate.error.details[0].message) 
+            await Entry.postEntry(input)
+            res.json({ message: 'Journal file saved successfully' });
+        }catch(err){
+            console.error(err)
+            res.status(500).send('Error posting entry')
+        }
     }
 
-    static putEntry(req, res){
-        Entry.putEntry()
-        res.send('Putted')
+    static async putEntry(req, res){
+        try{
+            const id = req.params.id
+            const result = await EntryController.checkEntryExist({id})
+            if(!result) return res.status(404).send('Entry not found')
+            const input = req.body
+            const validate = validatePartialEntry(input, {id})
+            if(validate.error) return res.status(400).send(validate.error.details[0].message)
+            await Entry.putEntry(input)
+            res.json({message: 'Journal file successfully updated'});
+        }catch(err){
+            console.error(err)
+            res.status(500).send('Error putting entry')
+        }
     }
 
-    static deleteEntry(req, res){
-        Entry.deleteEntry()
-        res.send('Deleted')
+    static async deleteEntry(req, res){
+        try{
+            const id = req.params.id
+            const result = await EntryController.checkEntryExist({id})
+            if(!result) return res.status(404).send('Entry not found')
+            await Entry.deleteEntry({id})
+            res.json({message: 'Journal file succesfully delted'})
+        }catch(err){
+            console.error(err)
+            res.status(500).send('Error deleting entry')
+        }
     }
 
-    static patchEntry(req, res){
-        Entry.patchEntry()
-        res.send('Patched')
+    static async checkEntryExist({id}){
+        try{
+            const entry = await Entry.getOneEntry(id)
+            return entry.length === 0 ? false : true
+        }catch(err){
+            console.error(err)
+            throw err
+        }
     }
 }

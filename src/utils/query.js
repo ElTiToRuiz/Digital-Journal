@@ -5,3 +5,9 @@ export function createUserQuery({ email, hashedPassword }) {
 export function getUserQuery({ email }) {
     return `SELECT * FROM users WHERE email = '${email}'`;
 }
+
+export function getAllEntriesQuery(){
+    return `SELECT * FROM entries`;
+}
+
+// TODO CREATE ALL QUERIES

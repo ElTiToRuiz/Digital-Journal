@@ -24,7 +24,7 @@ export class AuthController{
             const result = await AuthController.checkUser({email})
             if (result) return res.status(400).json({message: 'User already exists'})
             const validation = validateUser({email, password})
-            if (!validation.success) return res.status(400).json({message: 'Invalid input', error: validation.error})
+            if (validation.error) return res.status(400).json({message: 'Invalid input', error: validation.error})
             const hashedPassword = await cryptPassword({password})
             await User.createUser({email, hashedPassword})
             return res.json({message: 'User created'})
