@@ -68,12 +68,12 @@ digital-journal-backend/
 
 ```bash
 git clone https://github.com/your-username/digital-journal.git
-cd digital-journal/digital-journal-backend
+cd Digital-Journal-backend
 ```
 
 2. Install dependencies:
 ```bash
-    npm install
+npm install
 ```
 
 3. Create a `.env` file with environment variables:
