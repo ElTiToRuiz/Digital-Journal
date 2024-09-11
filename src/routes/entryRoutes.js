@@ -1,7 +1,10 @@
 import express from "express"
 import { EntryController } from "../controllers/entryController.js"
+import { authMiddleware } from "../middlewares/authMiddleware.js"
 
 export const entryRouter = express.Router()
+
+entryRouter.use(authMiddleware)
 
 entryRouter.get('/', EntryController.getAllEntries)
 

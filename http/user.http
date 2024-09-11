@@ -1,18 +1,21 @@
-### GET AN USER
+### LOGIN
 POST http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
-    "email": "ruizigor16@gmail.com",
-    "password": "@12Mara12"
+    "email": "example@example.com",
+    "password": "@passworD123"
 }
 
-### CREATE AN USER
+### REGISTER
 POST http://localhost:5000/auth/register
 Content-Type: application/json
 
 {
-    "email": "ruizigor16@gmail.com",
-    "password": "@12Maria12"
+    "email": "example@example.com",
+    "password": "@passworD123"
 }
 
+
+# ### GET ALL (ONLY FOR DEV)
+# GET http://localhost:5000/dev

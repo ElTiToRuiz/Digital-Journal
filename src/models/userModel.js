@@ -12,6 +12,17 @@ export class User{
         }
     }
 
+    static async getAll(){
+        try{
+            await User.connect()
+            const query = 'SELECT * FROM users'
+            const users = await this.database.executeQuery({query})
+            return users.rows
+        }catch(err){
+            throw err
+        }
+    }
+
     static async getUser({email}){
         try{
             await User.connect()
@@ -28,6 +39,7 @@ export class User{
             await User.connect()
             const query = createUserQuery({email, hashedPassword})
             await this.database.executeQuery({query})
+
         }catch(err){
             throw err
         }

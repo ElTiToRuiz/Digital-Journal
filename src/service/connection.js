@@ -50,3 +50,4 @@ export class Database{
     }
 }
 
+export const getJWT_TOKEN = ()=> process.env.JWT_KEY
