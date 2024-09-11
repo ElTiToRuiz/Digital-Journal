@@ -1,12 +1,14 @@
 import express, { json } from "express"
+import cors from "cors"
 import { entryRouter } from "./routes/entryRoutes.js"
 import { authRouter } from "./routes/authRoutes.js"
 import { devRouter } from "./routes/devRouter.js"
 
 const app = express()
 
-app.use(json())
 app.disable('x-powered-by') 
+app.use(cors())
+app.use(json())
 
 app.use("/entries", entryRouter)
 app.use("/auth", authRouter)
