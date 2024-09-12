@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken"
 import { getJWT_TOKEN } from "../service/connection.js";
 
 export const authMiddleware = (req, res, next) => {
-    const token = req.headers.authorization.slice(1, -1)
+    const token = req.headers.authorization
     if (!token) return res.status(400).json({message: 'Token not found', denied: true})
     try {
         const result = jwt.verify(token, getJWT_TOKEN());

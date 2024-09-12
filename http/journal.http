@@ -1,6 +1,8 @@
+#### IMPORTANT SEND THE JWT TOKEN AS A AUTHENTICATION HEADER
+
 ### GET ALL 
 GET http://localhost:5000/entries/
-Content-Type: application/json
+Authorization: <your_jwt_token>
 
 ### GET BY SEARCH
 GET http://localhost:5000/entries/search?dateb=1726002930002
