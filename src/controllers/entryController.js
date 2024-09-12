@@ -29,7 +29,7 @@ export class EntryController{
         try{
             const data = req.body
             const validate = validateEntry(data)
-            if(validate.error) return res.status(400).send(validate.error.details[0].message) 
+            if(validate.error) return res.status(400).send(validate.error) 
             await Entry.postEntry({data})
             res.json({ message: 'Journal file saved successfully' });
         }catch(err){
