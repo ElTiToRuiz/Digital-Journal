@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto"
 import { Database } from "../service/connection.js"
 import { createUserQuery, getUserQuery } from "../utils/query.js";
 
@@ -34,12 +35,12 @@ export class User{
         }
     }
 
-    static async createUser({email, hashedPassword}){
+    static async createUser({username, email, hashedPassword}){
         try{
             await User.connect()
-            const query = createUserQuery({email, hashedPassword})
+            const userId = randomUUID()
+            const query = createUserQuery({userId, username, email, hashedPassword})
             await this.database.executeQuery({query})
-
         }catch(err){
             throw err
         }

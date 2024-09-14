@@ -1,7 +1,7 @@
 const ALLOWED_KEYS = ['title', 'date', 'datea', 'dateb', 'content', 'mood', 'tags']
 
-export function createUserQuery({ email, hashedPassword }) {
-    return `INSERT INTO users (email, password) VALUES ('${email}', '${hashedPassword}')`
+export function createUserQuery({userId, username, email, hashedPassword }){
+    return `INSERT INTO users (id, username, email, password) VALUES ('${userId}', '${username}', '${email}', '${hashedPassword}')`
 }
 
 export function getUserQuery({ email }) {

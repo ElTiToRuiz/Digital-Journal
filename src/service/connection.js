@@ -30,7 +30,9 @@ export class Database{
     async connectToUser() {
         await this.db.execute(`
             CREATE TABLE IF NOT EXISTS users (
-                email TEXT PRIMARY KEY UNIQUE,
+                id SERIAL PRIMARY KEY,
+                username TEXT NOT NULL,
+                email TEXT UNIQUE,
                 password TEXT NOT NULL
             )    
         `);
